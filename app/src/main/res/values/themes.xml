@@ -1,0 +1,90 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SandTimer" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_primary</item>
+        <item name="colorSecondaryVariant">@color/color_primary</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColorPrimary">@color/black</item>
+
+    </style>
+
+    <style name="Theme.SandTimer" parent="Base.Theme.SandTimer" />
+
+
+    <style name="T1" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dp22</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/rubic_regular</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+
+    <style name="T2" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dp28</item>
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:fontFamily">@font/rubic_medium</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+
+    <style name="T3" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/dp36</item>
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:fontFamily">@font/rublic_bold</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+
+    <style name="CustomProgressBarStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_drawable</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="Button" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp40</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/rubic_regular</item>
+        <item name="android:background">@drawable/button_bg</item>
+        <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:textColor">@color/primary_red</item>
+        <item name="android:textSize">@dimen/dp16</item>
+    </style>
+
+    <style name="ButtonBlue" parent="Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp40</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/rubic_regular</item>
+        <item name="android:background">@drawable/button_bg_blue</item>
+        <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/dp16</item>
+    </style>
+
+
+    <style name="NumberPicker" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textSize">@dimen/dp40</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/timer_dialog_bg</item>
+    </style>
+
+</resources>

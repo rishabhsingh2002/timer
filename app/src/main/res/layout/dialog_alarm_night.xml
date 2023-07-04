@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/city_dialog_bg"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp8"
+        android:src="@drawable/ic_dialog_indicator" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp16"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cancel"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="#4D54E1"
+            android:textSize="@dimen/margin_15" />
+
+        <TextView
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Add Alarm"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp18" />
+
+        <TextView
+            android:id="@+id/save"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Save"
+            android:textColor="#4D54E1"
+            android:textSize="@dimen/margin_15" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/dp8"
+        android:background="#B5B5B5" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TimePicker
+                android:id="@+id/timePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#B5B5B5" />
+
+
+            <TextView
+                style="@style/T1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp16"
+                android:fontFamily="@font/rubic_medium"
+                android:text="Repeat"
+                android:textColor="@color/black"
+                android:textSize="@dimen/margin_20" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp16">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/monday"
+                        style="@style/T1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/day_selected"
+                        android:padding="@dimen/dp8"
+                        android:text="Mon"
+                        android:textSize="@dimen/dp16" />
+
+                    <TextView
+                        android:id="@+id/tuesday"
+                        style="@style/T1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp2"
+                        android:background="@drawable/day_selected"
+                        android:padding="@dimen/dp8"
+                        android:text="Tue"
+                        android:textSize="@dimen/dp16" />
+
+                    <TextView
+                        android:id="@+id/wednesday"
+                        style="@style/T1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp2"
+                        android:background="@drawable/day_selected"
+                        android:padding="@dimen/dp8"
+                        android:text="Wed"
+                        android:textSize="@dimen/dp16" />
+
+                    <TextView
+                        android:id="@+id/thursday"
+                        style="@style/T1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp2"
+                        android:background="@drawable/day_selected"
+                        android:padding="@dimen/dp8"
+                        android:text="Thu"
+                        android:textSize="@dimen/dp16" />
+
+                    <TextView
+                        android:id="@+id/friday"
+                        style="@style/T1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp2"
+                        android:background="@drawable/day_selected"
+                        android:padding="@dimen/dp8"
+                        android:text="Fri "
+                        android:textSize="@dimen/dp16" />
+
+                    <TextView
+                        android:id="@+id/saturday"
+                        style="@style/T1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp2"
+                        android:background="@drawable/day_selected"
+                        android:padding="@dimen/dp8"
+                        android:text="Sat"
+                        android:textSize="@dimen/dp16" />
+
+                    <TextView
+                        android:id="@+id/sunday"
+                        style="@style/T1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp2"
+                        android:background="@drawable/day_selected"
+                        android:padding="@dimen/dp8"
+                        android:text="Sun"
+                        android:textSize="@dimen/dp16" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </HorizontalScrollView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/dp16"
+                android:background="#B5B5B5" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/title"
+                    style="@style/T1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:layout_weight="4"
+                    android:background="@drawable/edit_text_alarm"
+                    android:drawableLeft="@drawable/ic_edit_title"
+                    android:drawablePadding="@dimen/dp8"
+                    android:hint="Enter title"
+                    android:paddingStart="@dimen/dp16"
+                    android:textColor="@color/black"
+                    android:textColorHint="#999999"
+                    android:textSize="@dimen/margin_20" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/dp16"
+                android:background="#B5B5B5" />
+
+            <TextView
+                style="@style/T1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp16"
+                android:fontFamily="@font/rubic_medium"
+                android:text="Sound"
+                android:textColor="@color/black"
+                android:textSize="@dimen/margin_20" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/ringOne"
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#F95A69"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Wind"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ringTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#37D2E2"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Ocean"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ringThree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#FE913D"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Rain"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ringFour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#864DDF"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Clock"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/ringFive"
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#F95A69"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Beep"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ringSix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#37D2E2"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Wakeup"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ringSeven"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#FE913D"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Kling"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ringEight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#864DDF"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Olenchic"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/ringNine"
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#F95A69"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Alarming"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ringTen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:layout_marginEnd="@dimen/margin_20"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:background="@drawable/music_bg"
+                            android:backgroundTint="#37D2E2"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp18"
+                                android:layout_height="@dimen/dp25"
+                                android:src="@drawable/ic_music" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <TextView
+                            style="@style/T1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="Cool"
+                            android:textColor="#9B9B9B"
+                            android:textSize="@dimen/dp13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </HorizontalScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/dp16"
+                android:background="#B5B5B5" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp16">
+
+                <TextView
+                    style="@style/T1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:fontFamily="@font/rubic_medium"
+                    android:text="Snooze"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/margin_20"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <Switch
+                    android:id="@+id/snooze"
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/margin_15"
+                    android:layout_marginEnd="@dimen/dp16"
+                    android:textOff="OFF"
+                    android:textOn="ON"
+                    android:thumb="@drawable/custom_switch_alarm"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/dp16"
+                android:background="#B5B5B5" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/delete"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/dp16"
+                android:text="Delete Alarm" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp78"
+    android:layout_margin="@dimen/dp4"
+    android:backgroundTint="#B5FFFFFF"
+    app:cardCornerRadius="@dimen/margin_15">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp12"
+            android:text="New Delhi"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/onOFFSwitch"
+            app:layout_constraintStart_toEndOf="@+id/amPm"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.477" />
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today, -9:30"
+            android:textColor="#424242"
+            android:textSize="@dimen/dp12"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/timeInDigit"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/dp16"
+            android:textSize="@dimen/dp32"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/amPm"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp8"
+            android:text="AM"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp14"
+            app:layout_constraintBottom_toBottomOf="@+id/timeInDigit"
+            app:layout_constraintStart_toEndOf="@+id/timeInDigit"
+            app:layout_constraintTop_toTopOf="@+id/timeInDigit" />
+
+        <Switch
+            android:id="@+id/onOFFSwitch"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/margin_15"
+            android:layout_marginEnd="@dimen/dp16"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:thumb="@drawable/custom_switch_alarm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

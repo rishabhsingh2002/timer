@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/main_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gif_bed_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_bedtime_visual_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?android:attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--        <include-->
+        <!--            android:id="@+id/tab"-->
+        <!--            layout="@layout/common_text_tab"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="@dimen/dp12"-->
+        <!--            android:layout_marginTop="@dimen/dp16"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/digital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_85"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="@dimen/dp32"
+                android:layout_marginTop="@dimen/dp32"
+                android:progress="50"
+                android:progressDrawable="@drawable/progress_drawable_bed_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/imageView2"
+                android:layout_width="62dp"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginBottom="-8dp"
+                android:src="@drawable/gif_bedtime_eye"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="@+id/progressBar" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@+id/progressBar">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <NumberPicker
+                        android:id="@+id/hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00"
+                        android:textSize="@dimen/dp36"
+                        android:theme="@style/NumberPicker" />
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/T1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:text=":"
+                    android:textSize="@dimen/dp40" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <NumberPicker
+                        android:id="@+id/minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="00"
+                        android:textSize="@dimen/dp36"
+                        android:theme="@style/NumberPicker" />
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/T1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:text=":"
+                    android:textSize="@dimen/dp40" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <NumberPicker
+                        android:id="@+id/amPm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:text="00"
+                        android:textSize="@dimen/dp36"
+                        android:theme="@style/NumberPicker" />
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:background="@drawable/clock_bottm_sheet_bg"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/titleOne"
+                style="@style/T1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp32"
+                android:layout_marginTop="@dimen/dp24"
+                android:text="Calculate your Sleep Duration"
+                android:textSize="@dimen/dp19"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/titleTwo"
+                style="@style/T1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp32"
+                android:layout_marginTop="@dimen/dp24"
+                android:text="Calculate your Sleep Duration"
+                android:textSize="@dimen/dp19"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/calculate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleTwo">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/firstSuggestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp50"
+                        android:layout_marginHorizontal="@dimen/dp24"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:background="@drawable/time_suggestion_bedtime_bg"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/dp8">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp8"
+                                android:text="9 hrs of sleep, 6 sleep cycles"
+                                android:textColor="#424242"
+                                android:textSize="@dimen/dp12"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/timeInDigitFirst"
+                                app:layout_constraintTop_toBottomOf="@+id/timeInDigitFirst" />
+
+
+                            <TextView
+                                android:id="@+id/timeInDigitFirst"
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp16"
+                                android:layout_marginTop="-16dp"
+                                android:text="10:00"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp18"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/amPmTextFirst"
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AM"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp12"
+                                app:layout_constraintBottom_toBottomOf="@+id/timeInDigitFirst"
+                                app:layout_constraintStart_toEndOf="@+id/timeInDigitFirst"
+                                app:layout_constraintTop_toTopOf="@+id/timeInDigitFirst" />
+
+                            <TextView
+                                android:id="@+id/recommended"
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp8"
+                                android:layout_marginEnd="@dimen/dp8"
+                                android:text="Recommended"
+                                android:textColor="#61AD00"
+                                android:textSize="@dimen/dp12"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/secondSuggestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp50"
+                        android:layout_marginHorizontal="@dimen/dp24"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:background="@drawable/time_suggestion_bedtime_bg"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/dp8">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp8"
+                                android:text="7.5 hrs of sleep, 5 sleep cycles"
+                                android:textColor="#424242"
+                                android:textSize="@dimen/dp12"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/timeInDigitSecond"
+                                app:layout_constraintTop_toBottomOf="@+id/timeInDigitSecond" />
+
+
+                            <TextView
+                                android:id="@+id/timeInDigitSecond"
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp16"
+                                android:layout_marginTop="-16dp"
+                                android:text="10:00"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp18"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/amPmTextSecond"
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AM"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp12"
+                                app:layout_constraintBottom_toBottomOf="@+id/timeInDigitSecond"
+                                app:layout_constraintStart_toEndOf="@+id/timeInDigitSecond"
+                                app:layout_constraintTop_toTopOf="@+id/timeInDigitSecond" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/thirdSuggestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp50"
+                        android:layout_marginHorizontal="@dimen/dp24"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:layout_marginBottom="@dimen/dp16"
+                        android:background="@drawable/time_suggestion_bedtime_bg"
+                        android:visibility="gone"
+                        app:cardCornerRadius="@dimen/dp8">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp8"
+                                android:text="6 hrs of sleep, 4 sleep cycles"
+                                android:textColor="#424242"
+                                android:textSize="@dimen/dp12"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/timeInDigitThird"
+                                app:layout_constraintTop_toBottomOf="@+id/timeInDigitThird" />
+
+
+                            <TextView
+                                android:id="@+id/timeInDigitThird"
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dp16"
+                                android:layout_marginTop="-16dp"
+                                android:text="10:00"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp18"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/amPmTextThird"
+                                style="@style/T1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AM"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dp12"
+                                app:layout_constraintBottom_toBottomOf="@+id/timeInDigitThird"
+                                app:layout_constraintStart_toEndOf="@+id/timeInDigitThird"
+                                app:layout_constraintTop_toTopOf="@+id/timeInDigitThird" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/seekBarLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp75"
+                        android:layout_marginHorizontal="@dimen/dp24"
+                        android:layout_marginTop="@dimen/dp16"
+                        android:background="#E0FFFFFF"
+                        android:visibility="visible"
+                        app:cardCornerRadius="@dimen/margin_15">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#E0FFFFFF"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spinnerReason"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="@dimen/dp4"
+                                android:layout_weight="2"
+                                android:entries="@array/bed_time_reason" />
+
+
+                            <View
+                                android:layout_width="@dimen/dp1"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginVertical="@dimen/dp16"
+                                android:layout_weight="0.01"
+                                android:background="#B5B1B1" />
+
+                            <Spinner
+                                android:id="@+id/spinnerTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="@dimen/dp4"
+                                android:layout_weight="0.4"
+                                android:entries="@array/times_bedtime" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/calculate"
+                style="@style/ButtonBlue"
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="@dimen/dp24"
+                android:layout_marginBottom="@dimen/dp32"
+                android:text="Calculate Bed Times"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/begin"
+                style="@style/ButtonBlue"
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="@dimen/dp24"
+                android:layout_marginBottom="@dimen/dp32"
+                android:text="Begin Again"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
