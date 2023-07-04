@@ -123,8 +123,8 @@ class MainActivity : AppCompatActivity() {
                             tabIcon?.setImageResource(navIconsActive[i])
                             // Set a smaller size for the icon of the first tab when selected
                             if (i == 0) {
-                                tabIcon?.scaleX = 1.0f
-                                tabIcon?.scaleY = 1.0f
+                                tabIcon?.scaleX = 0.6f
+                                tabIcon?.scaleY = 0.6f
                             } else {
                                 // Set the original size for the icons of other tabs when selected
                                 tabIcon?.scaleX = 1.2f
@@ -135,8 +135,8 @@ class MainActivity : AppCompatActivity() {
                             tabIcon?.setImageResource(navIcons[i])
                             // Set a smaller size for the icon of the first tab when not selected
                             if (i == 0) {
-                                tabIcon?.scaleX = 0.8f
-                                tabIcon?.scaleY = 0.8f
+                                tabIcon?.scaleX = 0.6f
+                                tabIcon?.scaleY = 0.6f
                             } else {
                                 // Set the original size for the icons of other tabs when not selected
                                 tabIcon?.scaleX = 1.0f
@@ -159,8 +159,8 @@ class MainActivity : AppCompatActivity() {
                 tabLabel.visibility = View.VISIBLE
                 tabIcon.setImageResource(navIconsActive[position])
                 // Set a smaller size for the icon of the first tab
-                tabIcon.scaleX = 1.0f
-                tabIcon.scaleY = 1.0f
+                tabIcon.scaleX = 0.6f
+                tabIcon.scaleY = 0.6f
             } else {
                 tabLabel.visibility = View.GONE
                 tabIcon.setImageResource(navIcons[position])

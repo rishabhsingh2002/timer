@@ -67,15 +67,6 @@ class AlarmDestinationActivity : AppCompatActivity() {
             mediaPlayer.start()
         }
 
-        val alarmIntent = Intent(this, AlarmReceiver::class.java)
-        alarmIntent.putExtra("title", title)
-        alarmIntent.putExtra("audioResId", audioResId)
-        alarmIntent.putExtra("alarmTime", alarmTime)
-        // Create a new pending intent for the alarm
-        pendingIntent = PendingIntent.getBroadcast(
-            this, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE
-        )
-
 
         ui.apply {
             snooze.clickTo {
@@ -106,10 +97,10 @@ class AlarmDestinationActivity : AppCompatActivity() {
                 }
             val currentTime = getCurrentTime()
             time.text = "${currentTime.first}:${currentTime.second}"
+            alarm.text = title ?: "ALARM"
         }
 
     }
-
 
     override fun onDestroy() {
         mediaPlayer.stop()
@@ -132,35 +123,31 @@ class AlarmDestinationActivity : AppCompatActivity() {
     private fun snoozeAlarm() {
         // Cancel the current alarm
         alarmManager.cancel(pendingIntent)
+
         // Calculate the snooze time (1 minute)
         val title = intent?.getStringExtra("title")
         val audioResId = intent?.getStringExtra("audioResId")
         val alarmTime = intent?.getLongExtra("alarmTime", 0)
-
         val snoozeTimeInMillis = System.currentTimeMillis() + (1 * 60 * 1000) // 1 minute
 
-        // Create a new alarm intent
-        val snoozeIntent = Intent(this, AlarmReceiver::class.java)
-        snoozeIntent.putExtra("title", title)
-        snoozeIntent.putExtra("audioResId", audioResId)
-        snoozeIntent.putExtra("alarmTime", snoozeTimeInMillis)
+        val intent = Intent(this, AlarmReceiver::class.java)
+        intent.putExtra("title", title)
+        intent.putExtra("audioResId", audioResId)
+        intent.putExtra("alarmTime", snoozeTimeInMillis)
 
-        // Create a new pending intent for the snooze alarm
-        snoozePendingIntent = PendingIntent.getBroadcast(
-            this, 0, snoozeIntent, PendingIntent.FLAG_IMMUTABLE
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        // Schedule the snooze alarm
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP, snoozeTimeInMillis, snoozePendingIntent
-            )
-        } else {
-            alarmManager.setAlarmClock(
-                AlarmManager.AlarmClockInfo(snoozeTimeInMillis, snoozePendingIntent),
-                snoozePendingIntent
-            )
-        }
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            snoozeTimeInMillis,
+            pendingIntent
+        )
 
         finish()
     }

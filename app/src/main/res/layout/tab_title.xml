@@ -17,6 +17,7 @@
     <TextView
         android:id="@+id/nav_label"
         style="@style/T1"
+        android:fontFamily="@font/rubic_medium"
         android:layout_marginTop="@dimen/dp2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
