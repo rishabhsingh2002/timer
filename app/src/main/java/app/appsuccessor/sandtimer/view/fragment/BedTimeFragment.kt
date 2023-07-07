@@ -23,17 +23,13 @@ import kotlin.math.min
 class BedTimeFragment : Fragment() {
     private lateinit var ui: FragmentBedTimeBinding
 
-    private var selectedTime: String? = null
     private var selectedTimeForWakeUp: String? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         ui = FragmentBedTimeBinding.inflate(layoutInflater)
-
-//        setUpTabText()
 
         setUpNumberPickup()
 
@@ -46,8 +42,9 @@ class BedTimeFragment : Fragment() {
 
                 titleOne.visibility = View.INVISIBLE
                 titleTwo.visibility = View.VISIBLE
-                titleTwo.text = "For a $selectedTime go to bed, you should wake up at:"
-
+                if (!selectedTimeForWakeUp.isNullOrEmpty()) {
+                    titleTwo.text = "For a $selectedTimeForWakeUp go to bed, you should wake up at:"
+                }
                 seekBarLayout.visibility = View.GONE
                 firstSuggestion.visibility = View.VISIBLE
                 secondSuggestion.visibility = View.VISIBLE
@@ -97,6 +94,9 @@ class BedTimeFragment : Fragment() {
 
                         selectedTimeForWakeUp = adapterView?.getItemAtPosition(position).toString()
                         Log.d("djfhald", "$selectedTimeForWakeUp")
+                        if (!selectedTimeForWakeUp.isNullOrEmpty()) {
+                            calculateTimes(selectedTimeForWakeUp!!)
+                        }
 
                     }
 
@@ -112,61 +112,11 @@ class BedTimeFragment : Fragment() {
 
     private fun setUpNumberPickup() {
         ui.apply {
-            hour.minValue = 1
-            hour.maxValue = 12
-
-            minute.minValue = 0
-            minute.maxValue = 59
-
-            // am pm
-            // Define the string values
-            val string1 = "AM"
-            val string2 = "PM"
-            // Set the displayed values
-            amPm.displayedValues = arrayOf(string1, string2)
-            // Set the custom display format
-            amPm.setFormatter { value ->
-                if (value == 0) {
-                    string1
-                } else {
-                    string2
-                }
-            }
-            // Set the range and default value
-            amPm.value = 0
-            amPm.minValue = 0
-            amPm.maxValue = 1
-
-            // Set up the listeners for hour, minute, and am/pm pickers
-            val timePickerListener = object : NumberPicker.OnValueChangeListener {
-                override fun onValueChange(picker: NumberPicker?, oldVal: Int, newVal: Int) {
-                    val selectedHour = hour.value
-                    val selectedMinute = minute.value
-                    val selectedAmPm = amPm.value
-
-                    val formattedHour = String.format("%02d", selectedHour)
-                    val formattedMinute = String.format("%02d", selectedMinute)
-                    val selectedTime =
-                        "$formattedHour:$formattedMinute${if (selectedAmPm == 0) "AM" else "PM"}"
-
-                    calculateTimes(selectedTime)
-                }
-            }
-
-            hour.setOnValueChangedListener(timePickerListener)
-            minute.setOnValueChangedListener(timePickerListener)
-            amPm.setOnValueChangedListener(timePickerListener)
-
-            // Get the initial selected time
-            val selectedHour = hour.value
-            val selectedMinute = minute.value
-            val selectedAmPm = amPm.value
-
-            val formattedHour = String.format("%02d", selectedHour)
-            val formattedMinute = String.format("%02d", selectedMinute)
-            selectedTime = "$formattedHour:$formattedMinute${if (selectedAmPm == 0) "AM" else "PM"}"
-
-            calculateTimes(selectedTime!!)
+            val calendar = Calendar.getInstance()
+            val hourDay = calendar.get(Calendar.HOUR_OF_DAY)
+            val minuteDay = calendar.get(Calendar.MINUTE)
+            hour.text = String.format("%02d", hourDay)
+            minute.text = String.format("%02d", minuteDay)
         }
     }
 
@@ -211,18 +161,5 @@ class BedTimeFragment : Fragment() {
         Log.d("BedTimeFragment", "Time after 7.5 hours: $timeAfter7_5HoursValue $amPmAfter7_5Hours")
         Log.d("BedTimeFragment", "Time after 6 hours: $timeAfter6HoursValue $amPmAfter6Hours")
     }
-
-
-//    private fun setUpTabText() {
-//        ui.tab.left.text = "STOP WH"
-//        ui.tab.left.setTextColor(resources.getColor(R.color.grey_light))
-//        ui.tab.center.text = "BEDTIME"
-//        ui.tab.center.setTextColor(resources.getColor(R.color.white))
-//        ui.tab.right.text = "         "
-//        ui.tab.left.clickTo {
-//            val viewPager = requireActivity().findViewById<ViewPager2>(R.id.viewPager)
-//            viewPager.currentItem = 3
-//        }
-//    }
 
 }

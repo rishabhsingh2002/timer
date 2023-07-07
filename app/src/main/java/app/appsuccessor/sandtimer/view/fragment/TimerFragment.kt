@@ -1,24 +1,35 @@
 package app.appsuccessor.sandtimer.view.fragment
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
 import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
+import android.os.VibrationEffect
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Vibrator
 import android.os.CountDownTimer
+import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.viewpager2.widget.ViewPager2
 import app.appsuccessor.sandtimer.R
+import app.appsuccessor.sandtimer.databinding.DialogPermissonBinding
 import app.appsuccessor.sandtimer.databinding.DialogTimePickerBinding
 import app.appsuccessor.sandtimer.databinding.FragmentTimerBinding
 import app.appsuccessor.sandtimer.view.util.clickTo
@@ -32,6 +43,7 @@ class TimerFragment : Fragment() {
     private lateinit var serviceIntent: Intent
     private var time = 0L
     private var countDownTimer: CountDownTimer? = null
+    private lateinit var vibrator: Vibrator
 
     private val updateTime: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -48,12 +60,17 @@ class TimerFragment : Fragment() {
         ui = FragmentTimerBinding.inflate(inflater, container, false)
 
 //        setUpTabText()
+//        requestOverlayPermission()
+        // Show the action bar
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
 
         return ui.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         ui.start.clickTo { startStopTimer() }
         ui.cancel.clickTo { resetTimer() }
@@ -105,15 +122,32 @@ class TimerFragment : Fragment() {
                 stopTimer()
                 time = 0
                 updateTimerViews()
+                vibrateDevice(1000) // Vibrate for 1 second
             }
         }
-
         countDownTimer?.start()
-
         ui.start.setImageDrawable(resources.getDrawable(R.drawable.ic_pause_timer))
         ui.progressBar.progressDrawable = resources.getDrawable(R.drawable.progress_drawable)
         timerStarted = true
         updateTimerViews() // Update the timer views with the initial time
+    }
+
+    private fun vibrateDevice(duration: Long) {
+        if (vibrator.hasVibrator()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // For devices running Android 8.0 and above
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        duration,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                )
+            } else {
+                // For devices running below Android 8.0
+                @Suppress("DEPRECATION")
+                vibrator.vibrate(duration)
+            }
+        }
     }
 
     private fun resetTimer() {
@@ -176,40 +210,39 @@ class TimerFragment : Fragment() {
         binding.cancel.clickTo {
             dialog.dismiss()
         }
+        dialog.show()
+    }
 
-//        // Adjust the dialog position and size after it is shown
-//        val attributes = dialog.window?.attributes
-//        attributes?.apply {
-//            gravity = Gravity.CENTER
-//            x = (32 * resources.displayMetrics.density).toInt()
-//            y = 0
-//            width = (getDisplayWidth() - 64 * resources.displayMetrics.density).toInt()
-//            height = WindowManager.LayoutParams.WRAP_CONTENT
-//        }
-//        dialog.window?.attributes = attributes
+    private fun showPermissionPickerDialog() {
+        val dialog = Dialog(requireContext(), R.style.FullScreenDialogTheme)
+        val binding = DialogPermissonBinding.inflate(LayoutInflater.from(requireContext()))
+        dialog.setContentView(binding.root)
+        dialog.setCancelable(true)
+
+        binding.allow.clickTo {
+            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            val uri = Uri.fromParts("package", context?.packageName, null)
+            intent.data = uri
+            startActivity(intent)
+
+            dialog.dismiss() // Dismiss the dialog after starting the settings activity
+        }
 
         dialog.show()
     }
 
-    private fun getDisplayWidth(): Int {
-        val displayMetrics = DisplayMetrics()
-        val windowManager =
-            requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return displayMetrics.widthPixels
+
+
+    private fun requestOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(
+                requireContext()
+            )
+        ) {
+            showPermissionPickerDialog()
+        } else {
+            // Permission Granted - Overlay functionality is available
+        }
     }
 
 
-//    private fun setUpTabText() {
-////        ui.tab.left.text = "             "
-////        ui.tab.center.text = "SAND TIMER"
-////        ui.tab.center.setTextColor(resources.getColor(R.color.black))
-////        ui.tab.right.text = "CLOCK"
-////        ui.tab.right.setTextColor(resources.getColor(R.color.black_light))
-////
-////        ui.tab.right.clickTo {
-////            val viewPager = requireActivity().findViewById<ViewPager2>(R.id.viewPager)
-////            viewPager.currentItem = 1
-////        }
-//    }
 }

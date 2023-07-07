@@ -9,8 +9,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -76,6 +79,7 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
         // recyclerview set up
         viewModel.getAllAlarms().observe(viewLifecycleOwner) { alarmList ->
             ui.rcvAlarms.adapter = AlarmAdapter(requireContext(), alarmList, this, this)
+            Log.d("dafadf", "$alarmList")
         }
 
         ui.addAlarm.clickTo {
@@ -102,7 +106,9 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
         bindingSheet.delete.clickTo {
             bottomSheet.dismiss()
         }
-        daySetUPDay(bindingSheet)
+        var days = arrayListOf<String>()
+
+        daySetUPDay(bindingSheet, days)
         ringToneSetUpDay(bindingSheet)
 
         bindingSheet.save.clickTo {
@@ -116,11 +122,13 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 alarmTitle = bindingSheet.title.text?.toString()
                 var selectedTime = getMillisecondsFromFormattedTime(formattedTime)
 
+
                 val alarm = Alarm(
                     title = alarmTitle ?: "Alarm",
                     time = "$hour:$minute",
                     ringtoneUri = selectedRingtoneUri!!,
-                    isEnabled = true
+                    isEnabled = true,
+                    days = days
                 )
                 setAlarm(selectedTime!!)
                 viewModel.insertAlarm(alarm)
@@ -155,7 +163,9 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
             viewModel.deleteAlarm(alarm.id!!)
             bottomSheet.dismiss()
         }
-        daySetUPDay(bindingSheet)
+        var days = arrayListOf<String>()
+
+        daySetUPDay(bindingSheet, days)
         ringToneSetUpDay(bindingSheet)
 
         //showing default values
@@ -163,7 +173,37 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
             title.setText(alarm.title)
             alarmTitle = alarm.title
             selectedRingtoneUri = alarm.ringtoneUri
+            if (alarm.days.contains("mon")) {
+                monday.setBackgroundResource(R.drawable.day_selected_day)
+                monday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("tue")) {
+                tuesday.setBackgroundResource(R.drawable.day_selected_day)
+                tuesday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("wed")) {
+                wednesday.setBackgroundResource(R.drawable.day_selected_day)
+                wednesday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("thu")) {
+                thursday.setBackgroundResource(R.drawable.day_selected_day)
+                thursday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("fri")) {
+                friday.setBackgroundResource(R.drawable.day_selected_day)
+                friday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("sat")) {
+                saturday.setBackgroundResource(R.drawable.day_selected_day)
+                saturday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("sun")) {
+                sunday.setBackgroundResource(R.drawable.day_selected_day)
+                sunday.setTextColor(resources.getColor(R.color.white))
+            }
         }
+
+
 
         bindingSheet.save.clickTo {
             var hour = bindingSheet.timePicker.hour
@@ -177,7 +217,8 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 title = alarmTitle ?: "Alarm",
                 time = "$hour:$minute",
                 ringtoneUri = selectedRingtoneUri!!,
-                isEnabled = true
+                isEnabled = true,
+                days = days
             )
             setAlarm(selectedTime!!)
             viewModel.updateAlarm(updatedAlarm)
@@ -186,7 +227,6 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
         bottomSheet?.setOnDismissListener {
             stopMediaPlayer()
         }
-
         bottomSheet.setCanceledOnTouchOutside(true)
         bottomSheet.setCancelable(true)
         bottomSheet.show()
@@ -210,7 +250,9 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
         bindingSheet.delete.clickTo {
             bottomSheet.dismiss()
         }
-        daySetUP(bindingSheet)
+        var days = arrayListOf<String>()
+
+        daySetUP(bindingSheet, days)
         ringToneSetUp(bindingSheet)
 
         bindingSheet.save.clickTo {
@@ -224,11 +266,13 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 alarmTitle = bindingSheet.title.text?.toString()
                 var selectedTime = getMillisecondsFromFormattedTime(formattedTime)
 
+
                 val alarm = Alarm(
                     title = alarmTitle ?: "Alarm",
                     time = "$hour:$minute",
                     ringtoneUri = selectedRingtoneUri!!,
-                    isEnabled = true
+                    isEnabled = true,
+                    days = days
                 )
                 setAlarm(selectedTime!!)
                 viewModel.insertAlarm(alarm)
@@ -263,7 +307,9 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
             viewModel.deleteAlarm(alarm.id!!)
             bottomSheet.dismiss()
         }
-        daySetUP(bindingSheet)
+        var days = arrayListOf<String>()
+
+        daySetUP(bindingSheet, days)
         ringToneSetUp(bindingSheet)
 
         //showing default values
@@ -271,6 +317,34 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
             title.setText(alarm.title)
             alarmTitle = alarm.title
             selectedRingtoneUri = alarm.ringtoneUri
+            if (alarm.days.contains("mon")) {
+                monday.setBackgroundResource(R.drawable.day_selected)
+                monday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("tue")) {
+                tuesday.setBackgroundResource(R.drawable.day_selected)
+                tuesday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("wed")) {
+                wednesday.setBackgroundResource(R.drawable.day_selected)
+                wednesday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("thu")) {
+                thursday.setBackgroundResource(R.drawable.day_selected)
+                thursday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("fri")) {
+                friday.setBackgroundResource(R.drawable.day_selected)
+                friday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("sat")) {
+                saturday.setBackgroundResource(R.drawable.day_selected)
+                saturday.setTextColor(resources.getColor(R.color.white))
+            }
+            if (alarm.days.contains("sun")) {
+                sunday.setBackgroundResource(R.drawable.day_selected)
+                tuesday.setTextColor(resources.getColor(R.color.white))
+            }
         }
 
         bindingSheet.save.clickTo {
@@ -285,7 +359,8 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 title = alarmTitle ?: "Alarm",
                 time = "$hour:$minute",
                 ringtoneUri = selectedRingtoneUri!!,
-                isEnabled = true
+                isEnabled = true,
+                days = days
             )
             setAlarm(selectedTime!!)
             viewModel.updateAlarm(updatedAlarm)
@@ -466,7 +541,7 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
         }
     }
 
-    private fun daySetUPDay(bindingSheet: DialogAlarmDayBinding) {
+    private fun daySetUPDay(bindingSheet: DialogAlarmDayBinding, days: ArrayList<String>) {
         var isBackground1 = true
         bindingSheet.monday.setBackgroundResource(R.drawable.day_not_selected)
         bindingSheet.monday.setTextColor(resources.getColor(R.color.black))
@@ -474,10 +549,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
             if (isBackground1) {
                 bindingSheet.monday.setBackgroundResource(R.drawable.day_selected_day)
                 bindingSheet.monday.setTextColor(resources.getColor(R.color.white))
+                days.add("mon")
                 isBackground1 = false
             } else {
                 bindingSheet.monday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.monday.setTextColor(resources.getColor(R.color.black))
+                days.remove("mon")
                 isBackground1 = true
             }
         }
@@ -489,13 +566,14 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.tuesday.setBackgroundResource(R.drawable.day_selected_day)
                 bindingSheet.tuesday.setTextColor(resources.getColor(R.color.white))
                 isBackground2 = false
+                days.add("tue")
             } else {
                 bindingSheet.tuesday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.tuesday.setTextColor(resources.getColor(R.color.black))
                 isBackground2 = true
+                days.remove("tue")
             }
         }
-
         var isBackground3 = true
         bindingSheet.wednesday.setBackgroundResource(R.drawable.day_not_selected)
         bindingSheet.wednesday.setTextColor(resources.getColor(R.color.black))
@@ -504,13 +582,14 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.wednesday.setBackgroundResource(R.drawable.day_selected_day)
                 bindingSheet.wednesday.setTextColor(resources.getColor(R.color.white))
                 isBackground3 = false
+                days.add("wed")
             } else {
                 bindingSheet.wednesday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.wednesday.setTextColor(resources.getColor(R.color.black))
                 isBackground3 = true
+                days.remove("wed")
             }
         }
-
         var isBackground4 = true
         bindingSheet.thursday.setBackgroundResource(R.drawable.day_not_selected)
         bindingSheet.thursday.setTextColor(resources.getColor(R.color.black))
@@ -519,10 +598,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.thursday.setBackgroundResource(R.drawable.day_selected_day)
                 bindingSheet.thursday.setTextColor(resources.getColor(R.color.white))
                 isBackground4 = false
+                days.add("thu")
             } else {
                 bindingSheet.thursday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.thursday.setTextColor(resources.getColor(R.color.black))
                 isBackground4 = true
+                days.remove("thu")
             }
         }
         var isBackground5 = true
@@ -533,10 +614,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.friday.setBackgroundResource(R.drawable.day_selected_day)
                 bindingSheet.friday.setTextColor(resources.getColor(R.color.white))
                 isBackground5 = false
+                days.add("fri")
             } else {
                 bindingSheet.friday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.friday.setTextColor(resources.getColor(R.color.black))
                 isBackground5 = true
+                days.add("fri")
             }
         }
 
@@ -548,10 +631,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.saturday.setBackgroundResource(R.drawable.day_selected_day)
                 bindingSheet.saturday.setTextColor(resources.getColor(R.color.white))
                 isBackground6 = false
+                days.add("sat")
             } else {
                 bindingSheet.saturday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.saturday.setTextColor(resources.getColor(R.color.black))
                 isBackground6 = true
+                days.remove("sat")
             }
         }
         var isBackground7 = true
@@ -562,15 +647,17 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.sunday.setBackgroundResource(R.drawable.day_selected_day)
                 bindingSheet.sunday.setTextColor(resources.getColor(R.color.white))
                 isBackground7 = false
+                days.add("sun")
             } else {
                 bindingSheet.sunday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.sunday.setTextColor(resources.getColor(R.color.black))
                 isBackground7 = true
+                days.remove("sun")
             }
         }
     }
 
-    private fun daySetUP(bindingSheet: DialogAlarmNightBinding) {
+    private fun daySetUP(bindingSheet: DialogAlarmNightBinding, days: ArrayList<String>) {
         var isBackground1 = true
         bindingSheet.monday.setBackgroundResource(R.drawable.day_not_selected)
         bindingSheet.monday.setTextColor(resources.getColor(R.color.black))
@@ -579,10 +666,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.monday.setBackgroundResource(R.drawable.day_selected)
                 bindingSheet.monday.setTextColor(resources.getColor(R.color.white))
                 isBackground1 = false
+                days.add("mon")
             } else {
                 bindingSheet.monday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.monday.setTextColor(resources.getColor(R.color.black))
                 isBackground1 = true
+                days.remove("mon")
             }
         }
         var isBackground2 = true
@@ -593,10 +682,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.tuesday.setBackgroundResource(R.drawable.day_selected)
                 bindingSheet.tuesday.setTextColor(resources.getColor(R.color.white))
                 isBackground2 = false
+                days.add("tue")
             } else {
                 bindingSheet.tuesday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.tuesday.setTextColor(resources.getColor(R.color.black))
                 isBackground2 = true
+                days.remove("tue")
             }
         }
 
@@ -608,10 +699,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.wednesday.setBackgroundResource(R.drawable.day_selected)
                 bindingSheet.wednesday.setTextColor(resources.getColor(R.color.white))
                 isBackground3 = false
+                days.add("wed")
             } else {
                 bindingSheet.wednesday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.wednesday.setTextColor(resources.getColor(R.color.black))
                 isBackground3 = true
+                days.remove("wed")
             }
         }
 
@@ -623,10 +716,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.thursday.setBackgroundResource(R.drawable.day_selected)
                 bindingSheet.thursday.setTextColor(resources.getColor(R.color.white))
                 isBackground4 = false
+                days.add("thu")
             } else {
                 bindingSheet.thursday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.thursday.setTextColor(resources.getColor(R.color.black))
                 isBackground4 = true
+                days.remove("thu")
             }
         }
         var isBackground5 = true
@@ -637,10 +732,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.friday.setBackgroundResource(R.drawable.day_selected)
                 bindingSheet.friday.setTextColor(resources.getColor(R.color.white))
                 isBackground5 = false
+                days.add("fri")
             } else {
                 bindingSheet.friday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.friday.setTextColor(resources.getColor(R.color.black))
                 isBackground5 = true
+                days.remove("fri")
             }
         }
 
@@ -652,10 +749,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.saturday.setBackgroundResource(R.drawable.day_selected)
                 bindingSheet.saturday.setTextColor(resources.getColor(R.color.white))
                 isBackground6 = false
+                days.add("sat")
             } else {
                 bindingSheet.saturday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.saturday.setTextColor(resources.getColor(R.color.black))
                 isBackground6 = true
+                days.remove("sat")
             }
         }
         var isBackground7 = true
@@ -666,10 +765,12 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
                 bindingSheet.sunday.setBackgroundResource(R.drawable.day_selected)
                 bindingSheet.sunday.setTextColor(resources.getColor(R.color.white))
                 isBackground7 = false
+                days.add("sun")
             } else {
                 bindingSheet.sunday.setBackgroundResource(R.drawable.day_not_selected)
                 bindingSheet.sunday.setTextColor(resources.getColor(R.color.black))
                 isBackground7 = true
+                days.remove("sun")
             }
         }
     }
@@ -727,6 +828,7 @@ class AlarmFragment : Fragment(), (Alarm) -> Unit, AlarmAdapter.OnAlarmToggleLis
         alarm.isEnabled = isChecked
         // Update the alarm in the storage mechanism (e.g., Room database)
         viewModel.updateAlarm(alarm)
+        Log.d("dlkfjaldaf", "$alarm")
         // Update the alarm in the RecyclerView
         val position = alarmList.indexOf(alarm)
         if (position != -1) {

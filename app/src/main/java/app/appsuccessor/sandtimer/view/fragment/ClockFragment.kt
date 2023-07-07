@@ -79,17 +79,13 @@ class ClockFragment : Fragment(), CityListAdapter.OnItemClickListener,
             // Handle the case when timeZones is null or empty
             return
         }
-
         bottomSheet = Dialog(requireContext())
         bottomSheet.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val bindingSheet = DialogCitiesListBinding.inflate(layoutInflater)
         bottomSheet.setContentView(bindingSheet.root)
-
         bindingSheet.cancel.clickTo {
             bottomSheet.dismiss()
         }
-
-
         val filteredTimeZoneList = ArrayList(timeZones)
         val timeZoneListAdapter = CityListAdapter(filteredTimeZoneList, this)
         bindingSheet.recyclerViewCityList.layoutManager = LinearLayoutManager(requireContext())
@@ -127,8 +123,9 @@ class ClockFragment : Fragment(), CityListAdapter.OnItemClickListener,
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         )
         bottomSheet.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        bottomSheet.window?.attributes?.width = ViewGroup.LayoutParams.MATCH_PARENT
+        bottomSheet.window?.attributes?.gravity = Gravity.BOTTOM
         bottomSheet.window?.attributes?.windowAnimations = R.style.DialogAnimation
-        bottomSheet.window?.setGravity(Gravity.BOTTOM)
     }
 
     override fun onItemClick(city: String) {

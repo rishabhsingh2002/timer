@@ -34,16 +34,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <app.appsuccessor.sandtimer.view.util.CustomAnalogWatchStopWatch
-            android:id="@+id/analogClock"
-            android:layout_width="@dimen/dp180"
-            android:layout_height="@dimen/margin200"
-            android:background="@drawable/ic_stop_watch_analog"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <app.appsuccessor.sandtimer.view.util.CustomAnalogWatchStopWatch-->
+        <!--            android:id="@+id/analogClock"-->
+        <!--            android:layout_width="@dimen/dp180"-->
+        <!--            android:layout_height="@dimen/margin200"-->
+        <!--            android:background="@drawable/ic_stop_watch_analog"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/linearLayout"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/digital"
@@ -189,26 +189,26 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/next"
-            android:layout_width="@dimen/dp25"
-            android:layout_height="@dimen/dp25"
-            android:layout_marginTop="@dimen/dp12"
-            android:src="@drawable/ic_stop_watch_next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/digital" />
+<!--        <ImageView-->
+<!--            android:id="@+id/next"-->
+<!--            android:layout_width="@dimen/dp25"-->
+<!--            android:layout_height="@dimen/dp25"-->
+<!--            android:layout_marginTop="@dimen/dp12"-->
+<!--            android:src="@drawable/ic_stop_watch_next"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/digital" />-->
 
-        <ImageView
-            android:id="@+id/previous"
-            android:layout_width="@dimen/dp25"
-            android:layout_height="@dimen/dp25"
-            android:layout_marginTop="@dimen/dp12"
-            android:src="@drawable/ic_stop_watch_previous"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/analogClock" />
+<!--        <ImageView-->
+<!--            android:id="@+id/previous"-->
+<!--            android:layout_width="@dimen/dp25"-->
+<!--            android:layout_height="@dimen/dp25"-->
+<!--            android:layout_marginTop="@dimen/dp12"-->
+<!--            android:src="@drawable/ic_stop_watch_previous"-->
+<!--            android:visibility="gone"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/analogClock" />-->
 
 
         <LinearLayout
@@ -237,7 +237,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-50dp"
+            android:layout_marginBottom="-65dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

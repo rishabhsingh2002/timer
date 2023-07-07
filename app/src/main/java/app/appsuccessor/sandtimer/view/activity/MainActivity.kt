@@ -1,6 +1,7 @@
 package app.appsuccessor.sandtimer.view.activity
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -8,8 +9,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -24,12 +28,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import app.appsuccessor.sandtimer.R
 import app.appsuccessor.sandtimer.databinding.ActivityMainBinding
+import app.appsuccessor.sandtimer.databinding.DialogPermissonBinding
 import app.appsuccessor.sandtimer.datasource.remote.CityApiClient
 import app.appsuccessor.sandtimer.view.fragment.AlarmFragment
 import app.appsuccessor.sandtimer.view.fragment.BedTimeFragment
 import app.appsuccessor.sandtimer.view.fragment.ClockFragment
 import app.appsuccessor.sandtimer.view.fragment.StopWatchFragment
 import app.appsuccessor.sandtimer.view.fragment.TimerFragment
+import app.appsuccessor.sandtimer.view.util.clickTo
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
@@ -40,18 +46,6 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     private lateinit var ui: ActivityMainBinding
     private lateinit var sharedPreferences: SharedPreferences
-
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            Toast.makeText(this@MainActivity, "Permission Granted", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(
-                this@MainActivity, "Please enable notification to get updates", Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
 
     private val navIconsActive = arrayListOf(
         R.drawable.ic_timer_active,
@@ -81,26 +75,12 @@ class MainActivity : AppCompatActivity() {
         ui = ActivityMainBinding.inflate(layoutInflater)
         setContentView(ui.root)
 
-        // Check notification permission
-        checkNotificationPermission()
+        requestOverlayPermission()
 
         getAllTimeZonesList()
 
         newTabSetUp()
-        requestOverlayPermission()
     }
-
-    private fun requestOverlayPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-            val uri = Uri.fromParts("package", packageName, null)
-            intent.data = uri
-            startActivity(intent)
-        } else {
-            // Permission Granted - Overlay functionality is available
-        }
-    }
-
 
     private fun newTabSetUp() {
         val adapter = CustomPagerAdapter(this)
@@ -179,45 +159,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun checkNotificationPermission() {
-        val permission = Manifest.permission.ACCESS_NOTIFICATION_POLICY
-        val granted = PackageManager.PERMISSION_GRANTED
-        val isPermissionGranted = ContextCompat.checkSelfPermission(this, permission) == granted
-
-        if (!isPermissionGranted) {
-            requestNotificationPermission()
-        }
-    }
-
-    private fun requestNotificationPermission() {
-        val permission = Manifest.permission.ACCESS_NOTIFICATION_POLICY
-        val shouldShowRationale = shouldShowRequestPermissionRationale(permission)
-
-        if (shouldShowRationale) {
-            showPermissionSnackbar()
-        } else {
-            requestPermissionLauncher.launch(permission)
-        }
-    }
-
-    private fun showPermissionSnackbar() {
-        val rootView = findViewById<View>(android.R.id.content)
-        val snackbar = Snackbar.make(
-            rootView,
-            "Please grant notification permission to receive updates",
-            Snackbar.LENGTH_INDEFINITE
-        )
-
-        snackbar.setAction("Grant") {
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-            val uri = Uri.fromParts("package", packageName, null)
-            intent.data = uri
-            startActivity(intent)
-        }
-
-        snackbar.show()
-    }
-
     private fun getAllTimeZonesList() {
         sharedPreferences = getSharedPreferences("AppPrefs", AppCompatActivity.MODE_PRIVATE)
 
@@ -242,6 +183,44 @@ class MainActivity : AppCompatActivity() {
                 // Handle the failure case here
             }
         })
+    }
+
+    private fun showPermissionPickerDialog() {
+        val dialog = Dialog(this, R.style.FullScreenDialogTheme)
+        val binding = DialogPermissonBinding.inflate(LayoutInflater.from(this))
+        dialog.setContentView(binding.root)
+        dialog.setCancelable(false)
+
+        binding.allow.clickTo {
+            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            val uri = Uri.fromParts("package", packageName, null)
+            intent.data = uri
+            startActivity(intent)
+
+            window.decorView.systemUiVisibility = 0
+            supportActionBar?.show()
+
+            dialog.dismiss() // Dismiss the dialog after starting the settings activity
+        }
+
+        dialog.show()
+
+        // Set the activity to full-screen
+        window.decorView.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+        actionBar?.hide()
+    }
+
+
+    private fun requestOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(
+                this
+            )
+        ) {
+            showPermissionPickerDialog()
+        } else {
+            // Permission Granted - Overlay functionality is available
+        }
     }
 
     inner class CustomPagerAdapter(fragmentActivity: FragmentActivity) :

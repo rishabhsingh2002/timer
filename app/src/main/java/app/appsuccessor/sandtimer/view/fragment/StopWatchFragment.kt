@@ -38,8 +38,7 @@ class StopWatchFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("LapTimes", Context.MODE_PRIVATE)
 
         lapTimesAdapter = LapTimesAdapter(requireContext(), lapTimes)
-//        setUpTabText()
-        setUpSlider()
+
         retrieveLapTimes() // Retrieve stored lap times
         setUpRecyclerView()
 
@@ -190,41 +189,4 @@ class StopWatchFragment : Fragment() {
         ui.minute.text = String.format("%02d", minutes)
         ui.second.text = String.format("%02d", seconds)
     }
-
-    private fun setUpSlider() {
-        ui.apply {
-            next.visibility = View.VISIBLE
-            digital.visibility = View.VISIBLE
-            next.clickToShow {
-                previous.visibility = View.VISIBLE
-                next.visibility = View.GONE
-                digital.visibility = View.GONE
-                analogClock.visibility = View.VISIBLE
-            }
-            previous.clickToShow {
-                next.visibility = View.VISIBLE
-                previous.visibility = View.GONE
-                analogClock.visibility = View.GONE
-                digital.visibility = View.VISIBLE
-            }
-        }
-    }
-
-//    private fun setUpTabText() {
-//        ui.tab.left.text = "ALARM"
-//        ui.tab.left.setTextColor(resources.getColor(R.color.black_light))
-//        ui.tab.center.text = "STOPWATCH"
-//        ui.tab.center.setTextColor(resources.getColor(R.color.black))
-//        ui.tab.right.text = "BEDTIME"
-//        ui.tab.right.setTextColor(resources.getColor(R.color.black_light))
-//        ui.tab.left.clickTo {
-//            val viewPager = requireActivity().findViewById<ViewPager2>(R.id.viewPager)
-//            viewPager.currentItem = 2
-//        }
-//
-//        ui.tab.right.clickTo {
-//            val viewPager = requireActivity().findViewById<ViewPager2>(R.id.viewPager)
-//            viewPager.currentItem = 4
-//        }
-//    }
 }

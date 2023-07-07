@@ -84,6 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/time" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp32"
@@ -94,6 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/alarm">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/snooze"
             style="@style/Button"
             android:layout_width="@dimen/dp130"
             android:layout_height="wrap_content"
@@ -101,7 +103,6 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/snooze"
                 style="@style/T1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -115,13 +116,26 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
 
-            <Spinner
-                android:id="@+id/spinnerTime"
-                android:layout_width="@dimen/margin_20"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.4"
-                android:entries="@array/snooze_time"
+            <ImageView
+                android:id="@+id/snoozeNight"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
+                android:layout_marginEnd="@dimen/dp8"
+                android:src="@drawable/ic_snooze_day"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/snoozeDay"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:layout_marginTop="@dimen/dp4"
+                android:layout_marginEnd="@dimen/dp8"
+                android:src="@drawable/ic_snooze_night"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -138,6 +152,96 @@
             android:layout_weight="1"
             android:text="Stop"
             android:textColor="@color/black" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/snoozeLayout"
+        android:layout_width="@dimen/dp120"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp50"
+        android:background="@drawable/snooze_bg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/twoMinute"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2 min"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp16" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            android:layout_marginHorizontal="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp4"
+            android:background="#B5B5B5" />
+
+        <TextView
+            android:id="@+id/fiveMinute"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="5 min"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp16" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            android:layout_marginHorizontal="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp4"
+            android:background="#B5B5B5" />
+
+        <TextView
+            android:id="@+id/tenMinute"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="10 min"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp16" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            android:layout_marginHorizontal="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp4"
+            android:background="#B5B5B5" />
+
+        <TextView
+            android:id="@+id/fifteenMinute"
+            style="@style/T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="15 min"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dp16" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            android:layout_marginHorizontal="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp4"
+            android:background="#B5B5B5" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
